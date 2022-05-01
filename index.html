@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="cont">
+        <div class="clock">
+            <div class="bars bar1"></div>
+            <div class="bars bar2"></div>
+            <div class="bars bar3"></div>
+            <div class="bars bar4"></div>
+            <div class="bars bar5"></div>
+            <div class="bars bar6"></div>
+            <div class="bars bar7"></div>
+            <div class="bars bar8"></div>
+            <div class="items"></div>
+            <div class="items"></div>
+            <div class="items item-xii">12</div>
+            <div class="items"></div>
+            <div class="items"></div>
+            <div class="items">9</div>
+            <div class="items"></div>
+            <div class="items"></div>
+            <div class="items"></div>
+            <div class="items">3</div>
+            <div class="items"></div>
+            <div class="items"></div>
+            <div class="items item-vi">6</div>
+            <div class="hand hour" id="hour1"></div>
+            <div class="hand minute" id="hour2"></div>
+            <div class="hand second" id="hour3"></div>
+            <div class="digital" id="hours"></div>
+            <div class="digital" id="min"></div>
+            <div class="digital" id="sec"></div>
+            <div class="date" id="day"></div>
+        </div>
+    </div>
+    <script>
+        setClock();
+        function setClock() {
+            today = new Date();
+            h = today.getHours();
+            m = today.getMinutes();
+            s = today.getSeconds();
+            mo = today.getMonth();
+            y = today.getFullYear();
+            d = today.getDate();
+            day = today.getDay();
+            var realday;
+
+            mo = mo < 10 ? "0" + mo : mo;
+            d = d < 10 ? "0" + d : d;
+
+
+            switch (day) {
+                case 0:
+                    realday = "Sunday";
+                    break;
+                case 1:
+                    realday = "Monday";
+                    break;
+                case 2:
+                    realday = "Tuesday";
+                    break;
+                case 3:
+                    realday = "Wednesday";
+                    break;
+                case 4:
+                    realday = "Thursday";
+                    break;
+                case 5:
+                    realday = "Friday";
+                    break;
+                case 6:
+                    realday = "Saturday";
+                    break;
+            }
+
+            h = h < 10 ? "0" + h : h;
+            m = m < 10 ? "0" + m : m;
+            s = s < 10 ? "0" + s : s;
+
+            document.getElementById('hours').innerHTML = h;
+            document.getElementById('min').innerHTML = m;
+            document.getElementById('sec').innerHTML = s;
+            document.getElementById('day').innerHTML = realday + ", " + d + "/" + mo + "/" + y;
+
+            h = h > 12 ? h - 12 : h;
+            hr = h * 30 + m / 2;
+            mr = m * 6 + s / 10;
+            sr = s * 6;
+
+            document.getElementById('hour1').style.transform = `rotate(${hr}deg)`;
+            document.getElementById('hour2').style.transform = `rotate(${mr}deg)`;
+            document.getElementById('hour3').style.transform = `rotate(${sr}deg)`;
+
+            setTimeout(function () { setClock(), 1000 });
+        }
+
+    </script>
+
+    <script>
+        var sound = new Howl({
+            urls: ['clock.mp3']
+        }).play();
+    </script>
+</body>
+
+</html>
